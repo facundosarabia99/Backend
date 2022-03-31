@@ -1,42 +1,30 @@
-/*const { count } = require("console");*/
+const { date } = require('assert-plus')
 
-class Usuario{
-    constructor(nombre, apellido, libros = [], mascotas = []){
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.libros = libros;
-        this.mascotas = mascotas;
+const fs = require('fs')
+
+let arrProd = JSON.parse(fs.readFileSync('productos.txt'));
+
+let ultimoId = 0
+
+class Caja{
+    constructor(ruta){
+        this.ruta = ruta
+        this.cosas = []
     }
 
-
-
-getFullName(){
-    console.log(`${this.nombre} ${this.apellido}`);
-}
-
-addMascota(masc){
-    this.mascotas.push(masc);
-}
-
-countMascotas(){
-    console.log(this.mascotas.length);
-}
-
-addbook(nombre, autor){
-    this.libros.push({nombre: nombre, autor: autor});
-}
-
-getBookNames(){
-    const arrayNombresLibros = [];
-    for ( const cadaLibro in this.libros){
-        arrayNombresLibros.push(this.libros[cadaLibro]['nombre'])
+    async guardar(cosa){
+        cosa.id = ultimoId + 1
+        this.cosas.push(cosa)
+        await fs.promises.writeFile(this.ruta, JSON.stringify(this.cosas))
+        ultimoId++
     }
-    console.log(arrayNombresLibros);
-    }
-
 }
 
-/*const Usuario = new Usuario ('Facundo', 'Sarabia', 10, 'Perro y Gato')*/
+const Caja = new Caja()
 
+const cosa = {
+    nombre: 'regla',
+    precio: 150
+}
 
-console.log(Usuario)
+Caja.guardar(cosa)
