@@ -18,13 +18,31 @@ class Caja{
         await fs.promises.writeFile(this.ruta, JSON.stringify(this.cosas))
         ultimoId++
     }
+
+    getById(id) {
+        console.log(this.products);
+    }
+
+    deleteById(id) {
+        this.products.splice(id,1);
+        console.log(`Product id: 1 fue eliminado`);
+    }
+
+    deleteAll(){
+        this.products = [];
+    }
+
+
 }
 
-const Caja = new Caja()
+/* const Caja = new Caja()
 
 const cosa = {
     nombre: 'regla',
     precio: 150
 }
 
-Caja.guardar(cosa)
+Caja.guardar(cosa)*/
+
+let prod = new Caja(arrProd);
+
