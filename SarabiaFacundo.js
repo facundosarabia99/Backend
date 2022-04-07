@@ -1,6 +1,6 @@
 const fs = require("fs");
 
-let arrProd = JSON.parse(fs.readFileSync('productos.txt'));
+let arrProd = JSON.parse(fs.readFileSync('Productos.txt'));
  
 
 class Contenedor {
