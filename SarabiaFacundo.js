@@ -1,48 +1,56 @@
-const { date } = require('assert-plus')
-
-const fs = require('fs')
+const fs = require("fs");
 
 let arrProd = JSON.parse(fs.readFileSync('productos.txt'));
+ 
 
-let ultimoId = 0
-
-class Caja{
-    constructor(ruta){
-        this.ruta = ruta
-        this.cosas = []
+class Contenedor {
+    constructor(productos) {
+        this.productos = productos;
     }
 
-    async guardar(cosa){
-        cosa.id = ultimoId + 1
-        this.cosas.push(cosa)
-        await fs.promises.writeFile(this.ruta, JSON.stringify(this.cosas))
-        ultimoId++
+    save(agregarProducto, agregarPrecio, agregarImg) {
+    
+        let nroId = 0;
+        let productoNuevo = {
+            producto: agregarProducto,
+            precio: agregarPrecio,
+            img: agregarImg
+        };
+    
+        for (let producto of this.productos) {
+            if( productoNuevo === undefined ) {
+                producto.id = nroId;
+                nroId++;
+            } else if (producto.id) {
+                this.productos.push(productoNuevo);
+                producto.id = nroId;
+                nroId++;
+            } else {
+                producto.id = nroId;
+                console.log(`El Id del producto agregado es: ${nroId}`)
+                nroId++;
+            }
+        }
     }
 
     getById(id) {
-        console.log(this.products);
+        console.log(this.productos[id]);
+    }
+    
+    getAll() {
+        console.log(this.productos);
     }
 
     deleteById(id) {
-        this.products.splice(id,1);
-        console.log(`Product id: 1 fue eliminado`);
+        this.productos.splice(id, 1);
+        console.log(`Producto id:1 fue eliminado`);
     }
 
-    deleteAll(){
-        this.products = [];
+    deleteAll() {
+        this.productos = [];
     }
-
 
 }
 
-/* const Caja = new Caja()
 
-const cosa = {
-    nombre: 'regla',
-    precio: 150
-}
-
-Caja.guardar(cosa)*/
-
-let prod = new Caja(arrProd);
-
+let prod = new Contenedor(arrProd);
