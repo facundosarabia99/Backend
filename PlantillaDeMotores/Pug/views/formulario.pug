@@ -1,0 +1,16 @@
+extends layout 
+
+block content
+    h2 Ingrese Producto
+    form(action="/productos" method="POST")
+        label Titulo:
+        input(type="text" name="title")
+        label Precio:
+        input(type="text" name="price")
+        label Imagen(URL):
+        input(type="text" name="thumbnail")
+        button Enviar
+
+
+    a(href="/productos")
+        button Ver todos los productos
