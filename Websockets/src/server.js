@@ -16,7 +16,7 @@ const mensajes = []
 //configuracion para socket
 io.on('conection', (socket) => {
     //parte productos
-    socket.emi('productos', productos)
+    socket.emit('productos', productos)
 
     socket.on('update', producto => {
         productos.push(producto)
