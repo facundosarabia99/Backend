@@ -1,0 +1,19 @@
+{
+  "name": "desafio8-db",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "inicializar": "node src/tables/tableProductos.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "knex": "^2.0.0",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.3.3",
+    "sqlite3": "^5.0.8"
+  }
+}

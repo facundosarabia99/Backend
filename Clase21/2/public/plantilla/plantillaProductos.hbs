@@ -1,0 +1,12 @@
+<h1>Productos</h1>
+{{#if hayProductos}}
+<ul>    
+{{#each productos}}
+<li>Item: {{this.nombreProd}}</li>
+{{/each}}
+</ul>
+{{else}}
+No hay datos
+{{/if}}
+<br>
+<a href="cargaProductos">Ir a carga de productos</a>
