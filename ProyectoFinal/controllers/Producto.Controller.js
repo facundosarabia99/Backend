@@ -1,5 +1,5 @@
 const fs = require('fs')
-const routeProducto = require('../Routers/ProdRouter')
+const routeProducto = require('../routes/ProdRouter')
 
 const productoCtrl = {}
 const producto = []

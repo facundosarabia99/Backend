@@ -1,6 +1,6 @@
 const {Router} = require('express')
 
-const {createOne, postOne, getOne, deleteProduct, deleteCart} = require('../Controllers/Carrito.Controller')
+const {createOne, postOne, getOne, deleteProduct, deleteCart} = require('../controllers/Carrito.Controller')
 
 const routerCarrito = Router()
 

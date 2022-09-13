@@ -1,6 +1,6 @@
 const {Router} = require('express')
 
-const {login, logout, soloAdmin, getAll, getOne, postOne, putOne, deleteOne} = require('../Controllers/Productos.Controller')
+const {login, logout, soloAdmin, getAll, getOne, postOne, putOne, deleteOne} = require('../controllers/Productos.Controller')
 
 const routerProducto = Router()
 
