@@ -1,19 +1,17 @@
-const {Router} = require('express')
+import express from "express";
+import * as cartController from "../controllers/cart.controller.js";
+import auth from '../middlewares/auth.middleware.js'
+const router = express.Router();
 
-const {createOne, postOne, getOne, deleteProduct, deleteCart} = require('../controllers/Carrito.Controller')
+router.post("/cart/:user", auth, cartController.createCart);
+router.put("/cart/:id/productos", auth, cartController.agregarProductosCart);
+router.delete("/cart/:id", auth, cartController.deleteCart);
+router.delete(
+  "/cart/:id/productos/:id_prod",
+  auth,
+  cartController.deleteProductosCart
+);
+router.delete("/cart/:id/clear", auth, cartController.clearCart);
+router.get("/cart/:id/productos", auth, cartController.listarProductosCartById);
 
-const routerCarrito = Router()
-
-routerCarrito.route('/')
-    .post(createOne)
-
-routerCarrito.route('/:id/productos/:id_prod')
-    .post(postOne)
-
-routerCarrito.route('/:id/productos')
-    .get(getOne)
-
-routerCarrito.route('/:id')
-    .delete(deleteCart)
-
-module.exports = routerCarrito;
+export default router;

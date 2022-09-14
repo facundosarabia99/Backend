@@ -1,22 +1,14 @@
-const {Router} = require('express')
+import express from 'express'
+import * as productController from '../controllers/product.controller.js'
+import auth from "../middlewares/auth.middleware.js";
 
-const {login, logout, soloAdmin, getAll, getOne, postOne, putOne, deleteOne} = require('../controllers/Productos.Controller')
+const router = express.Router()
 
-const routerProducto = Router()
+router.post("/product", auth, productController.createProduct);
+router.put("/product/:id", auth, productController.updateProduct);
+router.delete("/product/:id", auth, productController.deleteProduct);
+router.get("/product/:id", auth, productController.listarProductById);
+router.get("/products", auth, productController.listarProducts);
+router.get("/products/category/:catId", auth, productController.listarProductByCategoryId);
 
-routerProducto.route('/login')
-    .get(login)
-
-routerProductoo.route('/logout')
-    .get(logout)
-    
-routerProducto.route('/')
-    .get(getAll)
-    .post(soloAdmin, postOne);
-
-routerProducto.route('/:id')
-    .get(getOne)
-    .put(soloAdmin, putOne)
-    .delete(soloAdmin, deleteOne)
-
-module.exports = routerProducto;
+export default router;
