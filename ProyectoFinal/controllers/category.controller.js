@@ -71,13 +71,6 @@ export async function updateCategory(req, res) {
       error: "Enter category to update",
     });
   }
-  if (!body.role) {
-    return res.json({
-      success: false,
-      error: "-1",
-      descripcion: "Route /upload, method PUT not authorised",
-    });
-  }
   Category.findOne({ _id: req.params.id }).then((category) => {
     (category.timestamp = body.timestamp),
       (category.title = body.title),
