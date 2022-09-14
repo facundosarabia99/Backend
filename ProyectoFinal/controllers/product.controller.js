@@ -31,6 +31,7 @@ export function createProduct(req, res) {
     });
 }
 export async function listarProducts (req, res) {
+  console.log('LISTAR PRODUCTS')
   await Product.find({})
     .populate({ path: "category", model: "Category" })
     .then((productos) => {

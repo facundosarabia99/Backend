@@ -21,6 +21,8 @@ export async function signUp(req, res) {
       avatar,
       role,
     } = req.body;
+    console.log("CP2")
+    console.log(req.body)
     // validate
     if (!username || !email || !password || !passwordCheck)
     {
