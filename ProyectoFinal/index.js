@@ -1,4 +1,4 @@
-const express = require('express')
+import express from 'express'
 import cluster from 'cluster'
 import emoji from 'node-emoji'
 import bodyParser from 'body-parser'
@@ -24,7 +24,6 @@ import OrderRouter from "./routes/order.route.js";
 import MensajesRouter from "./routes/mensajes.route.js";
 import ConfigurationRouter from "./routes/configuration.route.js";
 import "./utils/db.js"
-import logger from "./utils/logger.js";
 import auth from "./middlewares/auth.middleware.js";
 import * as mensajesController from "./controllers/mensajes.controller.js";
 import Mensaje from './models/mensajes.model.js'
@@ -61,7 +60,7 @@ if (cluster.isMaster) {
   const morganMiddleware = morgan("combined", {
     skip: (req, res) => res.statusCode < 400,
     stream: {
-      write: (msg) => logger.http(msg),
+      write: (msg) => console.log(msg),
     },
   });
   app.use(morganMiddleware);

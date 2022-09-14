@@ -4,7 +4,6 @@ import jwt from "jsonwebtoken";
 import transporter from "../utils/mailTransport.js";
 import User from "../models/user.model.js";
 import auth from "../middlewares/auth.middleware.js";
-import logger from "../utils/logger.js"
 const router = express.Router();
 
 export async function signUp(req, res) {
@@ -25,13 +24,13 @@ export async function signUp(req, res) {
     // validate
     if (!username || !email || !password || !passwordCheck)
     {
-      logger.warn("Not all fields have been entered.");
+      console.warn("Not all fields have been entered.");
       return res
         .status(400)
         .json({ message: "Not all fields have been entered." });}
     if (password.length < 5)
      { 
-       logger.warn("The password needs to be at least 5 characters long.");
+       console.warn("The password needs to be at least 5 characters long.");
        return res
         .status(400)
         .json({
@@ -39,7 +38,7 @@ export async function signUp(req, res) {
         });}
     if (password !== passwordCheck)
       {
-        logger.warn("Enter the same password twice for verification.");
+        console.warn("Enter the same password twice for verification.");
         return res
         .status(400)
         .json({ message: "Enter the same password twice for verification." });}
@@ -47,7 +46,7 @@ export async function signUp(req, res) {
     const existingUser = await User.findOne({ username: username });
     if (existingUser)
     {
-      logger.warn("An account already exists with this username")
+      console.warn("An account already exists with this username")
         return res
         .status(400)
         .json({ message: "An account with this username already exists." });}
@@ -67,7 +66,7 @@ export async function signUp(req, res) {
       role,
     });
     const savedUser = await newUser.save();
-    logger.info("Se registro un nuevo usuario");
+    console.info("Se registro un nuevo usuario");
     res.json(savedUser);
     try {
       const mailOptions = {
@@ -87,13 +86,13 @@ export async function signUp(req, res) {
         `,
       };
       const response = await transporter.sendMail(mailOptions);
-      logger.info("Email sent to registred user");
+      console.info("Email sent to registred user");
     } catch (error) {
-      logger.fatal("Error, fail to send email to user");
+      console.fatal("Error, fail to send email to user");
     }
   } catch (err) {
     res.status(500).json({ error: err.message });
-     logger.fatal("Error to register");
+    console.fatal("Error to register");
   }
 }
 

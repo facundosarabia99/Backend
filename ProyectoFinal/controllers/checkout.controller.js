@@ -2,7 +2,6 @@ import express from "express";
 import cart from "../models/cart.model.js";
 import mongoose from "mongoose";
 import transporter from "../utils/mailTransport.js";
-import logger from "../utils/logger.js"
 
 const date = new Date();
 
@@ -31,12 +30,12 @@ export async function checkoutByCartId(req,res){
 
             loggers.info("Email sent to registered user");
         } catch (error){
-            logger.fatal("Error sending email to user");
+            console.fatal("Error sending email to user");
         }
         return res.status(200).json({success: true, msg: "Purchase successfull", data: CartById})
         }
         catch{
-            logger.fatal(`Cart Id ${req.params.id} doesn't exists`);
+            console.fatal(`Cart Id ${req.params.id} doesn't exists`);
             return res
                 .status(404)
                 .json({success: false, error: "Couldn't find cart"});

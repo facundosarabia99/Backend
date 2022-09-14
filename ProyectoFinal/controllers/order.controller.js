@@ -1,6 +1,5 @@
 import Order from '../models/order.model.js'
 import transporter from "../utils/mailTransport.js";
-import logger from "../utils/logger.js";
 
 export async function createOrder(req, res) {
   const body = req.body;
@@ -40,9 +39,9 @@ export async function createOrder(req, res) {
         `,
         };
         transporter.sendMail(mailOptions);
-        logger.info("Mail of new purchase has been sent");
+        console.info("Mail of new purchase has been sent");
       } catch (error) {
-        logger.fatal("Error sending email to user");
+        console.fatal("Error sending email to user");
       }
       return res.status(201).json({
         success: true,

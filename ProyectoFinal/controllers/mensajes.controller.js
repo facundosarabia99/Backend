@@ -1,4 +1,4 @@
-import Mensaje from "../models/mesnajes.model.js";
+import Mensaje from "../models/mensajes.model.js";
 const date = new Date();
 
 export function createMensajes(req, res){
