@@ -28,17 +28,7 @@ import auth from "./middlewares/auth.middleware.js";
 import * as mensajesController from "./controllers/mensajes.controller.js";
 import Mensaje from './models/mensajes.model.js'
 
-/*const nCpus = os.cpus().length
-if (cluster.isMaster) {
-  console.log(`${emoji.get(":zap:")}Master PID ${process.pid} is running`);
-  for (let i = 0; i < nCpus; i++) {
-    cluster.fork()    
-  }
-  cluster.on('exit', (worker, code, signal) => {
-    console.log(`${emoji.get(":zap:")} Worker PID ${worker.process.pid} died`);
-    cluster.fork()    
-  })
-} else {*/
+
   const app = express()
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: false }));
@@ -107,4 +97,4 @@ console.log("CP 1")
     console.log(`${emoji.get("computer")}Server is running on port ${PORT}.`);
   });
   httpServer.listen(3001)
-//}
+  
