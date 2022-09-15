@@ -7,7 +7,7 @@ const date = new Date();
 
 export async function checkoutByCartId(req,res){
     try{
-        const CartById = await Cart.findOne({_id: req.params.id})
+        const CartById = await cart.findOne({_id: req.params.id})
         console.log(req.user);
         try{
             const mailOptions = {
@@ -30,14 +30,13 @@ export async function checkoutByCartId(req,res){
 
             loggers.info("Email sent to registered user");
         } catch (error){
-            console.fatal("Error sending email to user");
+            console.log("Error sending email to user");
         }
         return res.status(200).json({success: true, msg: "Purchase successfull", data: CartById})
-        }
-        catch{
-            console.fatal(`Cart Id ${req.params.id} doesn't exists`);
+        } catch(error) {
+            console.log(`Cart Id ${req.params.id} doesn't exists`);
             return res
                 .status(404)
-                .json({success: false, error: "Couldn't find cart"});
+                .json({success: false, message: "Error creating cart", error: JSON.stringify(error)});
     }
 }
