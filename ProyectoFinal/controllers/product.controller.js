@@ -96,15 +96,7 @@ export async function updateProduct (req, res) {
       error: "Must enter product to update",
     });
   }
-  if (!body.role) {
-    return res.json({
-      success: false,
-      error: "-1",
-      descripcion: "Route /update, method PUT not authorized",
-    });
-  }
   Product.findOne({ _id: req.params.id }).then((producto) => {
-    (producto.timestamp = body.timestamp),
       (producto.title = body.title),
       (producto.description = body.description),
       (producto.sku = body.sku),

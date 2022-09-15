@@ -6,7 +6,7 @@ export function createMensajes(req, res){
     if (!body) {
         return res.status(400).json({
             success: false,
-            error: "Muste enter category to create",
+            error: "Muste enter message to create",
         });
     }
     const mensaje = new Mensaje(body);
@@ -44,7 +44,7 @@ export async function listarMensajes(req, res){
     });
 }
 export async function listarMensajesByEmail(req, res) {
-    await Mensaje.find({ email: req.body.email})
+    await Mensaje.find({ email: req.query.email})
     .then((mensajes) => {
       if (!mensajes.length) {
         return res

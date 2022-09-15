@@ -90,11 +90,11 @@ export async function signUp(req, res) {
       const response = await transporter.sendMail(mailOptions);
       console.info("Email sent to registred user");
     } catch (error) {
-      console.fatal("Error, fail to send email to user");
+      console.error("Error, fail to send email to user");
     }
   } catch (err) {
     res.status(500).json({ error: err.message });
-    console.fatal("Error to register");
+    console.error("Error to register");
   }
 }
 
@@ -167,14 +167,25 @@ export async function deleteUser(req, res) {
 
 export async function tokenIsValid(req, res) {
   try {
-    const token = req.header("Authorization");
+    const authorization = req.header("Authorization");
+    const splittedToken = authorization.split(' ');
+    console.log(2)
+    const token = splittedToken[1];
     if (!token) return res.json(false);
+    console.log(3)
+    console.log(process.env.JWT_SECRET)
+    console.log(token);
     const verified = jwt.verify(token, process.env.JWT_SECRET);
+    console.log(4)
     console.log(verified)
     if (!verified) return res.json(false);
+    console.log(5)
     const user = await User.findById(verified.id);
+    console.log(6)
     if (!user) return res.json(false);
+    console.log(7)
     return res.json(true);
+    console.log(8)
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
